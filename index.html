@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Incident Logger</title>
+  <link rel="manifest" href="/manifest.json" />
+  <link rel="icon" href="/assets/icons/icon-192.png" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta name="theme-color" content="#2296F3" />
+</head>
+<body>
+  <header>
+    <img src="/assets/icons/icon-72.png" alt="logo" width="32" height="32" />
+    <h1>Incident Logger</h1>
+    <div style="margin-left:auto" class="flex">
+      <button class="secondary" id="installBtn" hidden>Install App</button>
+      <button class="secondary" id="notifyBtn">Enable Notifications</button>
+    </div>
+  </header>
+  <div class="container">
+
+    <div class="card">
+      <h2>Quick log</h2>
+      <p class="small">Click to capture date, time, location, and add what happened.</p>
+      <div class="flex">
+        <button class="primary" id="logBtn">Log an incident</button>
+        <button class="secondary" id="exportBtn">Export CSV</button>
+      </div>
+      <p id="status" class="small"></p>
+    </div>
+
+    <div class="card">
+      <div class="tabs">
+        <button data-tab="timeline" class="active">Timeline</button>
+        <button data-tab="reports">Reports</button>
+        <button data-tab="settings">Settings</button>
+      </div>
+      <div id="tab-timeline">
+        <table class="table" id="logTable">
+          <thead>
+            <tr><th>Date</th><th>Time</th><th>Location</th><th>What happened</th></tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+      <div id="tab-reports" hidden>
+        <div class="grid">
+          <div>
+            <h3>This week</h3>
+            <p class="small">ISO week (Mon–Sun)</p>
+            <div id="weekSummary"></div>
+          </div>
+          <div>
+            <h3>This month</h3>
+            <p class="small"></p>
+            <div id="monthSummary"></div>
+          </div>
+        </div>
+      </div>
+      <div id="tab-settings" hidden>
+        <h3>Notifications</h3>
+        <p class="small">Local notifications work without a server. Push (works even when the app is closed) needs VAPID keys and a small backend.</p>
+        <div class="card">
+          <label>VAPID Public Key (Base64 URL-safe)</label>
+          <input id="vapidPublicKey" placeholder="BExxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx" />
+          <div class="flex" style="margin-top:8px">
+            <button class="secondary" id="subscribeBtn">Create/Refresh Push Subscription</button>
+            <button class="secondary" id="copySubscriptionBtn">Copy Subscription JSON</button>
+          </div>
+          <pre id="subscriptionOutput" class="small" style="white-space:pre-wrap"></pre>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer">Made with ♥ – works offline, installable as a PWA.</div>
+  </div>
+
+  <script src="/app.js"></script>
+</body>
+</html>
